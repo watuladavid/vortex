@@ -1,0 +1,267 @@
+/*!
+
+=========================================================
+* Argon Dashboard React - v1.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+
+
+
+// Core
+
+@import "argon-dashboard/custom/functions";
+@import "argon-dashboard/custom/variables";
+@import "argon-dashboard/custom/mixins";
+
+// bootstrap (4.3.1) components
+
+@import "argon-dashboard/bootstrap/root";
+@import "argon-dashboard/bootstrap/reboot";
+@import "argon-dashboard/bootstrap/type";
+@import "argon-dashboard/bootstrap/images";
+@import "argon-dashboard/bootstrap/code";
+@import "argon-dashboard/bootstrap/grid";
+@import "argon-dashboard/bootstrap/tables";
+@import "argon-dashboard/bootstrap/forms";
+@import "argon-dashboard/bootstrap/buttons";
+@import "argon-dashboard/bootstrap/transitions";
+@import "argon-dashboard/bootstrap/dropdown";
+@import "argon-dashboard/bootstrap/button-group";
+@import "argon-dashboard/bootstrap/input-group";
+@import "argon-dashboard/bootstrap/custom-forms";
+@import "argon-dashboard/bootstrap/nav";
+@import "argon-dashboard/bootstrap/navbar";
+@import "argon-dashboard/bootstrap/card";
+@import "argon-dashboard/bootstrap/breadcrumb";
+@import "argon-dashboard/bootstrap/pagination";
+@import "argon-dashboard/bootstrap/badge";
+@import "argon-dashboard/bootstrap/jumbotron";
+@import "argon-dashboard/bootstrap/alert";
+@import "argon-dashboard/bootstrap/progress";
+@import "argon-dashboard/bootstrap/media";
+@import "argon-dashboard/bootstrap/list-group";
+@import "argon-dashboard/bootstrap/close";
+@import "argon-dashboard/bootstrap/modal";
+@import "argon-dashboard/bootstrap/tooltip";
+@import "argon-dashboard/bootstrap/popover";
+@import "argon-dashboard/bootstrap/carousel";
+@import "argon-dashboard/bootstrap/utilities";
+@import "argon-dashboard/bootstrap/print";
+
+// Argon utilities and components
+
+@import "argon-dashboard/custom/reboot";
+@import "argon-dashboard/custom/utilities";
+@import "argon-dashboard/custom/components";
+
+// Vendor (Plugins)
+
+@import "argon-dashboard/custom/vendors";
+
+// Docs components
+
+@import "argon-dashboard/docs/variables";
+@import "argon-dashboard/docs/nav";
+@import "argon-dashboard/docs/clipboard-js";
+@import "argon-dashboard/docs/component-examples";
+@import "argon-dashboard/docs/prism";
+@import "argon-dashboard/docs/content";
+@import "argon-dashboard/docs/sidebar";
+@import "argon-dashboard/docs/footer";
+
+// React Differences
+@import "react/react-differences";
+
+// custom css
+
+.nav-bottom {
+    border-bottom: 1px solid #ABABAB;
+    padding-bottom: 20px;
+}
+
+.auth-header-text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 43px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #000030;
+}
+
+.card-white {
+    background: #FFFFFF;
+    /* shadow_bulle */
+    box-shadow: -4px 8px 26px rgba(0, 0, 0, 0.21);
+    border-radius: 50px;
+}
+
+.card-client {
+    background: #F5E034;
+    /* shadow_bulle */
+    box-shadow: -4px 8px 26px rgba(0, 0, 0, 0.21);
+    border-radius: 32px;
+}
+
+.card-header-text-auth {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 43px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #282828;
+}
+
+.redirect-msg {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: #000030;
+}
+
+.auth-form-link {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration-line: underline;
+    color: #6CAAE3;
+}
+
+.input-label {
+    margin-left: 35px;
+    font-weight: 500;
+}
+
+.input-tip {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #828282;
+    margin-left: 35px;
+}
+
+.input-icon-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 8px;
+}
+
+.theme-button {
+    background: #F5E034;
+    box-shadow: -4px 8px 26px rgba(0, 0, 0, 0.07);
+    border:#F5E034;
+    border-radius: 50px;
+    color: #000030;
+}
+
+.theme-button:hover {
+    color: #F5E034;
+    border: #000030;
+    background: #000030;
+}
+
+.logout-button {
+    background: #DE0E0E;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    color: white;
+    border: #DE0E0E;
+    font-weight: 500;
+}
+
+.logout-button:hover {
+    color: white;
+    border: #DE0E0E;
+    background: #DE0E0E;
+}
+
+.btn-white {
+    background: white;
+    color: #000030;
+    border: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    margin-right: 40px !important;
+}
+
+.btn-white:hover {
+    background: white;
+    color: #000030;
+    border: white;
+}
+
+.required-notice {
+    font-size: 12px;
+/* or 307% */
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.validation-error-message {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #F24E4E;
+    margin-left: 35px;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.badge-nvl-facture {
+    position: absolute;
+    top: -50%;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    background: #2B4999;
+    color: white;
+}
+
+.badge-facture-impayee {
+    position: absolute;
+    top: -50%;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    background: #F5E034;
+    color: #DE0E0E;
+}
+
+.info-abonnement-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    /* or 156% */
+    letter-spacing: 0.05em;
+    color: #000030;
+}
+
+.info-abonnement-detail {
+    font-weight: 300;
+}
+
+.table-header-theme {
+    border-right: 2px solid white;
+}

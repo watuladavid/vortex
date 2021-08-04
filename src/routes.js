@@ -15,6 +15,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+import React from "react";
+
 import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
 import Paiements from "views/examples/Paiements.js";
@@ -24,34 +27,27 @@ import Login from "views/examples/Login.js";
 import ForgotPassword from "views/examples/ForgotPassword.js"
 //import Tables from "views/examples/Tables.js";
 //import Icons from "views/examples/Icons.js";
-import Contrats from "views/examples/Contrats.js"
+import { Gear, Cart, Tag } from 'akar-icons';
 
 var routes = [
   {
-    path: "/contrats",
-    name: "Mes abonnements",
-    icon: "ni ni-tv-2 text-primary",
-    component: Contrats,
-    layout: "/admin"
-  },
-  {
     path: "/index",
-    name: "Mes factures",
-    icon: "ni ni-single-copy-04 text-info",
+    name: "Mes facturations",
+    icon: <Tag className="mr-2" size={20} color="#F5E034" />,
     component: Index,
     layout: "/admin"
   },
   {
     path: "/paiements",
-    name: "Moyen de paiement",
-    icon: "ni ni-money-coins text-green",
+    name: "Paiements Espace Client",
+    icon: <Cart className="mr-2" size={20} color="#F5E034" />,
     component: Paiements,
     layout: "/admin"
   },
   {
     path: "/user-profile",
-    name: "Profile",
-    icon: "ni ni-single-02 text-yellow",
+    name: "Parametre",
+    icon: <Gear className="mr-2" size={20} color="#F5E034" />,
     component: Profile,
     layout: "/admin"
   },

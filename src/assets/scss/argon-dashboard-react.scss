@@ -107,6 +107,7 @@
     /* shadow_bulle */
     box-shadow: -4px 8px 26px rgba(0, 0, 0, 0.21);
     border-radius: 50px;
+    border: none;
 }
 
 .card-client {
@@ -114,6 +115,7 @@
     /* shadow_bulle */
     box-shadow: -4px 8px 26px rgba(0, 0, 0, 0.21);
     border-radius: 32px;
+    border-radius: none;
 }
 
 .card-header-text-auth {
@@ -169,6 +171,7 @@
     border:#F5E034;
     border-radius: 50px;
     color: #000030;
+    font-weight: 400;
 }
 
 .theme-button:hover {

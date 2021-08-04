@@ -71,7 +71,7 @@ function Admin(props) {
         return routes[i].name;
       }
     }
-    return "Brand";
+    return "Energie Electrique du CONGO S.A";
   };
 
     return (
@@ -82,7 +82,7 @@ function Admin(props) {
           logo={{
             innerLink: "/admin/index",
             imgSrc: Logo,
-            imgAlt: "..."
+            imgAlt: "Energie Electrique du CONGO SA"
           }}
         />}
         <div className="main-content">

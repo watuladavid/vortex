@@ -38,9 +38,9 @@ import {
 } from "reactstrap";
 
 import { useAuth } from "../../contexts/AuthContext"
-import Logo from "../../assets/img/brand/logo.png"
+//import Logo from "../../assets/img/brand/logo.png"
 
-function AdminNavbar () {
+function AdminNavbar (props) {
   const [error, setError] = useState("")
   const { logout } = useAuth()
   const { history } = useHistory()
@@ -63,9 +63,9 @@ function AdminNavbar () {
             <Link
               className="d-none d-lg-inline-block"
               to="/admin/index"
+              style={{fontSize: "18px", color: "#000030"}}
             >
-              <img alt="Energie Electrique du CONGO" src={Logo} width="248" height="112" />
-              {/*this.props.brandText*/}
+              {props.brandText}
             </Link>
             {/*<Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
               <FormGroup className="mb-0">
@@ -79,18 +79,18 @@ function AdminNavbar () {
                 </InputGroup>
               </FormGroup>
             </Form>*/}
-            <Nav className="align-items-center d-none d-md-flex" navbar>
-              {/*<Button onClick={handleLogout} className="btn-white">
+            {/*<Nav className="align-items-center d-none d-md-flex" navbar>
+              <Button onClick={handleLogout} className="btn-white">
                 <span>Nouvelle Facture</span>
                 <Badge className="badge-md badge-circle badge-nvl-facture">1</Badge>
               </Button>
               <Button onClick={handleLogout} className="btn-white">
                 <span>Factures impayées</span>
                 <Badge className="badge-md badge-circle badge-facture-impayee">1</Badge>
-          </Button>*/}
+          </Button>}
               <Button onClick={handleLogout} className="logout-button">Déconnexion</Button>
             </Nav>
-            {error && <p>{error}</p>}
+            {error && <p>{error}</p>*/}
           </Container>
         </Navbar>
       </>

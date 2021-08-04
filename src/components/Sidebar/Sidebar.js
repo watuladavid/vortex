@@ -16,8 +16,8 @@
 
 */
 /*eslint-disable*/
-import React from "react";
-import { NavLink as NavLinkRRD, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink as NavLinkRRD, Link, useHistory } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
 
@@ -52,52 +52,61 @@ import {
   Col
 } from "reactstrap";
 
-import Logo from "../../assets/img/brand/logo.png"
+import { useAuth } from "../../contexts/AuthContext"
 
-class Sidebar extends React.Component {
-  state = {
-    collapseOpen: false
-  };
-  constructor(props) {
-    super(props);
-    this.activeRoute.bind(this);
+import Logo from "../../assets/img/brand/logo.png"
+import { Book, Headphone, FacebookFill, Globe, SignOut } from 'akar-icons';
+
+function Sidebar(props) {
+  const [collapseOpen, setCollapseOpen] = useState(false)
+  const [error, setError] = useState("")
+  const { logout } = useAuth()
+  const { history } = useHistory()
+
+  async function handleLogout() {
+    setError("")
+
+    try {
+      await logout()
+      history.push("/auth/login")
+    } catch(error) {
+      setError(error)
+      console.log(error)
+    }
   }
+
   // verifies if routeName is the one active (in browser input)
-  activeRoute(routeName) {
-    return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
+  const activeRoute = (routeName) => {
+    return props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
   }
   // toggles collapse between opened and closed (true/false)
-  toggleCollapse = () => {
-    this.setState({
-      collapseOpen: !this.state.collapseOpen
-    });
+  const toggleCollapse = () => {
+    setCollapseOpen(!collapseOpen)
   };
   // closes the collapse
-  closeCollapse = () => {
-    this.setState({
-      collapseOpen: false
-    });
+  const closeCollapse = () => {
+    setCollapseOpen(false)
   };
   // creates the links that appear in the left menu / Sidebar
-  createLinks = routes => {
+  const createLinks = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") return (
         <NavItem key={key}>
           <NavLink
             to={prop.layout + prop.path}
             tag={NavLinkRRD}
-            onClick={this.closeCollapse}
+            onClick={closeCollapse}
             activeClassName="active"
           >
-            <i className={prop.icon} />
+            {prop.icon}
             {prop.name}
           </NavLink>
         </NavItem>
       );
     });
   };
-  render() {
-    const { bgColor, routes, logo } = this.props;
+
+    const { bgColor, routes, logo } = props;
     let navbarBrandProps;
     if (logo && logo.innerLink) {
       navbarBrandProps = {
@@ -110,6 +119,7 @@ class Sidebar extends React.Component {
         target: "_blank"
       };
     }
+
     return (
       <Navbar
         className="navbar-vertical fixed-left navbar-light bg-white"
@@ -121,7 +131,7 @@ class Sidebar extends React.Component {
           <button
             className="navbar-toggler"
             type="button"
-            onClick={this.toggleCollapse}
+            onClick={toggleCollapse}
           >
             <span className="navbar-toggler-icon" />
           </button>
@@ -132,15 +142,17 @@ class Sidebar extends React.Component {
                 alt={logo.imgAlt}
                 className="navbar-brand-img"
                 src={Logo}
+                width="236"
+                height="102"
               />
             </NavbarBrand>
           ) : null}
           {/* User */}
           <Nav className="align-items-center d-md-none">
             <UncontrolledDropdown nav>
-              {<DropdownToggle nav className="nav-link-icon">
+              {/*<DropdownToggle nav className="nav-link-icon">
                 <i className="ni ni-bell-55" />
-              </DropdownToggle>}
+          </DropdownToggle>*/}
               <DropdownMenu
                 aria-labelledby="navbar-default_dropdown_1"
                 className="dropdown-menu-arrow"
@@ -192,7 +204,7 @@ class Sidebar extends React.Component {
             </UncontrolledDropdown>
           </Nav>
           {/* Collapse */}
-          <Collapse navbar isOpen={this.state.collapseOpen}>
+          <Collapse navbar isOpen={collapseOpen}>
             {/* Collapse header */}
             <div className="navbar-collapse-header d-md-none">
               <Row>
@@ -213,7 +225,7 @@ class Sidebar extends React.Component {
                   <button
                     className="navbar-toggler"
                     type="button"
-                    onClick={this.toggleCollapse}
+                    onClick={toggleCollapse}
                   >
                     <span />
                     <span />
@@ -238,45 +250,50 @@ class Sidebar extends React.Component {
               </InputGroup>
             </Form>*/}
             {/* Navigation */}
-            <Nav navbar>{this.createLinks(routes)}</Nav>
-            {/* Divider 
+            <Nav navbar>{createLinks(routes)}</Nav>
+            {/* Divider */}
             <hr className="my-3" />
-            {/* Heading 
-            <h6 className="navbar-heading text-muted">Documentation</h6>
-            {/* Navigation 
+            {/* Heading */}
+            <h6 className="navbar-heading" style={{color: "#000030"}}>Documentation</h6>
+            {/* Navigation */}
             <Nav className="mb-md-3" navbar>
               <NavItem>
-                <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
-                  <i className="ni ni-spaceship" />
-                  Getting started
+                <NavLink href="https://firebasestorage.googleapis.com/v0/b/cliente2c-72f60.appspot.com/o/Livret%20E%C2%B2C%20r%C3%A9pond%20%C3%A0%20vos%20questions.pdf?alt=media&token=16f87145-ac75-41a1-bbfb-cc8c65fb1b5f" target="_blank">
+                  <Book className="pr-2" />
+                  Guide du Client
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                  <i className="ni ni-palette" />
-                  Foundation
+                <NavLink href="tel:4242">
+                  <Headphone className="pr-2" />
+                  Centre d'Appel 4242
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                  <i className="ni ni-ui-04" />
-                  Components
+                <NavLink href="https://www.facebook.com/E2CSA" target="_blank">
+                  <FacebookFill className="pr-2" />
+                  Facebook
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="https://e2c.cg/" target="_blank">
+                  <Globe className="pr-2" />
+                  e2c.cg
                 </NavLink>
               </NavItem>
             </Nav>
             <Nav className="mb-md-3" navbar>
               <NavItem className="active-pro active">
-                <NavLink href="https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=adr-admin-sidebar">
-                  <i className="ni ni-spaceship" />
-                  Upgrade to PRO
+                <NavLink style={{color: "#DE0E0E", fontWeight: '500', fontSize: "20px", cursor: "pointer"}} onClick={handleLogout}>
+                  <SignOut className="pr-2" color="#DE0E0E" size={28} />
+                  Se Déconnecter
                 </NavLink>
               </NavItem>
-            </Nav>*/}
+            </Nav>
           </Collapse>
         </Container>
       </Navbar>
     );
-  }
 }
 
 Sidebar.defaultProps = {

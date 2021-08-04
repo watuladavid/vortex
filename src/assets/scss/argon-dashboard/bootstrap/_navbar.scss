@@ -206,7 +206,7 @@
 
   .navbar-nav {
     .nav-link {
-      color: $navbar-light-color;
+      color: #000030;
 
       @include hover-focus {
         color: $navbar-light-hover-color;
@@ -221,7 +221,7 @@
     .active > .nav-link,
     .nav-link.show,
     .nav-link.active {
-      color: $navbar-light-active-color;
+      color: #000030;
     }
   }
 
@@ -235,7 +235,7 @@
   }
 
   .navbar-text {
-    color: $navbar-light-color;
+    color: #000030;
     a {
       color: $navbar-light-active-color;
 
@@ -258,7 +258,7 @@
 
   .navbar-nav {
     .nav-link {
-      color: $navbar-dark-color;
+      color: #000030;
 
       @include hover-focus {
         color: $navbar-dark-hover-color;
@@ -273,7 +273,7 @@
     .active > .nav-link,
     .nav-link.show,
     .nav-link.active {
-      color: $navbar-dark-active-color;
+      color: #000030;
     }
   }
 

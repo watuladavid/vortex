@@ -203,6 +203,7 @@ function Index() {
                   >
                     <NavItem>
                       <NavLink
+                        style={{color: "#000030"}}
                         aria-selected={navPills === 1}
                         className={classnames("mb-sm-3 mb-md-0", {
                           active: navPills === 1
@@ -216,6 +217,7 @@ function Index() {
                     </NavItem>
                     <NavItem>
                       <NavLink
+                        style={{color: "#000030"}}
                         aria-selected={navPills === 2}
                         className={classnames("mb-sm-3 mb-md-0", {
                           active: navPills === 2
@@ -229,6 +231,7 @@ function Index() {
                     </NavItem>
                     <NavItem>
                       <NavLink
+                        style={{color: "#000030"}}
                         aria-selected={navPills === 3}
                         className={classnames("mb-sm-3 mb-md-0", {
                           active: navPills === 3

@@ -192,7 +192,7 @@ export default function Header({sendAbonnement, facturation, impayees, reglement
                     </CardBody>
                     <CardFooter style={{display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", borderBottomLeftRadius: "42px", borderBottomRightRadius: "42px", paddingTop: "0"}}>
                       <Col className="text-left" style={{display: "flex", flexDirection: "column", paddingTop: "10px"}}>
-                        <span style={{fontWeight: "bold",fontSize: "24px",lineHeight: "43px",color: "#000030"}}>Montant de la dette</span>
+                        <span style={{fontWeight: "500",fontSize: "24px",lineHeight: "43px",color: "#000030"}}>Montant de la dette</span>
                         <span style={{fontWeight: "bold",fontSize: "32px",lineHeight: "43px",color: "#DE0E0E"}}>{impayees.total} XAF</span>
                       </Col>
                       <Col className="text-right" style={{display: "flex",alignItems: "center",justifyContent: "center", paddingTop: "10px"}}>
@@ -250,7 +250,6 @@ export default function Header({sendAbonnement, facturation, impayees, reglement
                                     {
                                       return (
                                         <DropdownItem onClick={e => {selectAbonnement(e, client.numbranchement)}}>
-                                          <DropdownItem />
                                           {client.adressebranchement}
                                         </DropdownItem>
                                       )

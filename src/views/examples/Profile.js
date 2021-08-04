@@ -28,7 +28,10 @@ import {
   Input,
   Container,
   Row,
-  Col
+  Col,
+  InputGroup,
+  Label,
+  Alert
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
@@ -38,21 +41,28 @@ import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Envelope, LockOff } from 'akar-icons';
+import usePasswordToggle from "hooks/usePasswordToggle";
+import useConfirmPasswordToggle from "hooks/useConfirmPasswordToggle";
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(32),
-  confirmPassword: yup.string().min(8).max(32)
-  .oneOf([yup.ref('password'), null], 'Les mots de passe ne sont pas identiques'),
+  email: yup.string("Format invalide").email("Le format de l'addresse email n'est pas valide"),
+  password: yup.string("Format invalide").min(8, "le mot de passe doit avoir au moins 8 charactère").max(32, "Mot de passe trop long"),
+  confirmPassword: yup.string().test('mot de passe identique', 'Le mot de passe doit etre identique', function(value){
+    return this.parent.password === value
+  })
 });
 
 function Profile () {
   const { currentUser, updateEmail, updatePassword , verifyEmail } = useAuth();
   const history = useHistory();
   const [message, setMessage] = useState("")
+  const [error, setError] = useState("")
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
+  const [PasswordInputType, ToggleIcon] = usePasswordToggle();
+  const [ConfirmPasswordInputType, ConfirmToggleIcon] = useConfirmPasswordToggle();
 
   async function submit(data) {      
     const promises = []
@@ -66,10 +76,10 @@ function Profile () {
 
     Promise.all(promises)
       .then(() => {
-        alert("Modifié avec succès")
+        setMessage("Modifié avec succès")
       })
-      .catch((error) => {
-        console.log("La mise à jour a échoué")
+      .catch(error => {
+        setError("La mise à jour a échoué")
       })
       //.finally(() => {
       //  setLoading(false)
@@ -79,9 +89,9 @@ function Profile () {
 
     return (
       <>
-        <UserHeader />
+        {/*<UserHeader />*/}
         {/* Page content */}
-        <Container className="mt--7" fluid>
+        <Container fluid>
           <Row className="justify-content-center">
             {/*<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
               <Card className="card-profile shadow">
@@ -169,17 +179,18 @@ function Profile () {
                 </CardBody>
               </Card>
             </Col>*/}
-            <Col className="order-xl-1" xl="6">
-              <Card className="bg-secondary shadow border-0">
+            <Col className="mt-5 mb-5 mb-xl-5 order-xl-1" xl="6">
+              <Card className="card-white">
                 <Form onSubmit={handleSubmit(submit)} noValidate>
-                  <CardHeader className="bg-white border-0">
+                  <CardHeader className="bg-transparent border-0">
                     <Row className="align-items-center">
                       <Col xs="8">
-                        <h3 className="mb-0">Mon Compte</h3>
+                        <h3 className="mb-0" style={{fontWeight: "300", color: "#000030"}}>Mon Compte</h3>
                       </Col>
                       <Col className="text-right" xs="4">
                         <Button
-                          color="primary"
+                          className="theme-button"
+                          style={{fontWeight: 300}}
                           type="submit"
                           size="sm"
                         >
@@ -187,72 +198,55 @@ function Profile () {
                         </Button>
                       </Col>
                     </Row>
+                    {(error && <Alert className="text-center mt-2 pb-2" color="danger">{error}</Alert>) || (message && <Alert className="text-center mt-2 pb-2" color="success">{message}</Alert>)}
                   </CardHeader>
                   <CardBody>
                   
-                    <h6 className="heading-small text-muted mb-4">
+                    <h6 className="heading-small mb-4" style={{fontWeight: "300", color: "#000030"}}>
                       Information de l'utilisateur
                     </h6>
                     <div className="pl-lg-4">
                       <Row>
                         <Col>
                           <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-email"
-                            >
-                              Email address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              defaultValue={currentUser.email}
-                              id="input-email"
-                              placeholder="email@example.com"
-                              type="email"
-                              required
-                              {...register("email")}
-                            />
-                            <p>{errors.email?.message}</p>
+                            <Label className="input-label">Adresse E-mail</Label>
+                            <div className="input-icon-container">
+                              <Envelope color="#000030" />
+                              <InputGroup className=" mx-2">
+                                <Input invalid={errors.email} defaultValue={currentUser.email} placeholder="Saisissez votre adresse E-mail" {...register("email")} type="email" name="email" autoComplete="new-email"/>
+                              </InputGroup>
+                            </div>
+                            {errors.email ? (<p className="validation-error-message">{errors.email.message}</p>) : <p className="input-tip">Ex : johndoe@gmail.com</p>}
                           </FormGroup>
                         </Col>
                       </Row>
                       <Row>
                         <Col>
                           <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-password"
-                            >
-                              Nouveau Mot de passe
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-password"
-                              type="password"
-                              {...register("password")}
-                              placeholder="Laissez vide pour garder votre mot de passe actuelle"
-                            />
-                            <p>{errors.password?.message}</p>
+                          <Label className="input-label">Nouveau mot de passe*</Label>
+                          <div className="input-icon-container">
+                            <LockOff color="#000030" />
+                            <InputGroup className=" mx-2">
+                              <Input invalid={errors.password} placeholder="Laissez vide pour garder votre mot de passe actuelle" {...register("password")} type={PasswordInputType} name="password" autoComplete="new-password" />
+                              <span className="password-toggle-icon">{ToggleIcon}</span>
+                            </InputGroup>
+                          </div>
+                          {errors.password ? <p className="validation-error-message">{errors.password?.message}</p> : <p className="input-tip">Votre mot de passe doit contenir  au moins 8 caractères </p>}
                           </FormGroup>
                         </Col>
                       </Row>
                       <Row>
                         <Col>
                           <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-confirmPassword"
-                            >
-                              Confirmez Nouveau Mot de passe
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-confirmPassword"
-                              type="password"
-                              {...register("confirmPassword")}
-                              placeholder="Laissez vide pour garder votre mot de passe actuelle"
-                            />
-                            <p>{errors.confirmPassword?.message}</p>
+                            <Label className="input-label">Confirmez Nouveau Mot de passe</Label>
+                            <div className="input-icon-container">
+                              <LockOff color="#000030" />
+                              <InputGroup className=" mx-2">
+                                <Input invalid={errors.confirmPassword} placeholder="Laissez vide pour garder votre mot de passe actuelle" {...register("confirmPassword")} type={ConfirmPasswordInputType} name="confirmPassword" autoComplete="confirm-password"/>
+                                <span className="password-toggle-icon">{ConfirmToggleIcon}</span>
+                              </InputGroup>
+                            </div>
+                            {errors.confirmPassword ? <p className="validation-error-message">{errors.confirmPassword?.message}</p> : <p className="input-tip">Resaisissez vote mot de passe</p>}
                           </FormGroup>
                         </Col>
                       </Row>

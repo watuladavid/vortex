@@ -60,9 +60,8 @@ function AddContrat () {
 
     return (
       <>
-        <UserHeader />
         {/* Page content */}
-        <Container className="mt--7" fluid>
+        <Container className="mt-5 mb-5 mb-xl-5" fluid>
           <Row className="justify-content-center">
             <Col className="order-xl-1" xl="6">
           <div className="nav-wrapper">
